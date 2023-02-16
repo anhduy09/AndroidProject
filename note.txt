@@ -1,0 +1,36 @@
+onCreate*(
+The method that is called when the activity is first created and the ideal location for most initializtion tasks to be performed
+the method is passed an argument in the form of a Bundle objetc that may contain dynamic state informaion (typiclly relating to the state of the user interface) from a prio invocation of the activity
+
+onRestart()
+called when the activity is about to restart after having previously been stopped by runtime system
+
+onStart()
+always called immediately after the call to the onCreate() or onRestart() methods, this method indicates to the activity that is about to become visible to the user
+This call will be followed by a call to onResume() if the activity moves to the top of the activity stack, onStop() in the event that it is pushed down the stack by another activity
+
+onResume()
+indicates that the activity is now at the top of acivity stack and is the activity with which the user is currently interacting
+
+onPause()
+indicates that a previous activity is about to become the foreground activity. this call will be followed by a call to either the onResume() or onStop()
+Steps may be taken within this method to store persistent state infomation not yet saved by the app
+to avoid delays in switching between activities, time consuming operations such as storing data to databse pr performing network operations should be avoided within this method
+this method should also ensure that any CPU intensive tasks such as anumation are stopped
+
+onStop()
+The activity is now no longer visible to the user. the two possible senarios that may follow this call are a call to onRestart() in the vent that the actyivity moves to the foreground again, on Destroy() if the activity is being terminated.
+
+onDestroy()
+The activity is about to be destroyed, either voluntarily because has completed its tasks and has called the finish() method or because the runtime is terminating it either to release memory or due to a configuration change (such as the orientation of the device changing)
+It's important to note that a call will not always be made to onDestroy() when an activity is terminated
+
+
+Dynamic State
+in addtion to lifecycle methods outlined above, there are two methods intended specifically for saving and restoring the dynamic state of an activity:
+--- onRestoreInstanceState(Bundle savedInstanceState)
+This method is called immediately after a call to the onStart() method in the vent that theactivity is restarting from a previous invocation in which state was saved
+As with onCreate(), this method is passed a Bundle object containing the previous state data
+This method is typically used in situations where it makes more sense to restore a previuos state after the initaialization of activity has been performed in the onCreate() and onStart()
+
+
