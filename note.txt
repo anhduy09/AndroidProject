@@ -33,4 +33,49 @@ This method is called immediately after a call to the onStart() method in the ve
 As with onCreate(), this method is passed a Bundle object containing the previous state data
 This method is typically used in situations where it makes more sense to restore a previuos state after the initaialization of activity has been performed in the onCreate() and onStart()
 
+_________________________________________________
+The Manifest
+
+Every app project must have an AndroidManifest.xml file (with precisely that name) at the root of the project source set. The manifest file describes essential information about your app to the Android build tools, the Android operating system and Google play
+Among many other things, the manifest file is required to declare the following:
+<The components of the app> include all activities, services, broadcast receivers and content providers. Each component must define basic properties such as name of its kotlin or Java class. It can also declare cappabilities such as which device configurations it can be handle, and intent filters that describe how the component can be started.
+<The permissions> that the app needs in order to access protectetd parts of the system or other apps. it also declares any permissions that other apps must have if they want to access content from this app.
+<The hardware and software features> the app requires, which affects which devices can install the app from Google Play.
+
+- App components: for each app component that you create in your app, you must declare a corresponding XML element in the manifest file:
+* <activity> for each subclass of Activity
+* <service> for each subclass of Service
+* <receiver> for each subclass of BroadcastReceiver.
+* <provider> for each subclass of ContentProvider
+	if you subclass any of these components without declaring it in the manifest file, the system cannot start it. The name of your subclass must be specified with the name attribute, using full package designation.
+
+- Intent filter: App activities, services and broadcast receivers are activated by intents. An intent is a message defined by an intent object that describes an action to perform, including the data to be acted upon, category of component should perform the action, and other instructions. An app component can have any number of intent filters (defined with the <intent-filter> element), each one describing a different capability of that component.
+
+- Icons and lables: several manifest elements have icon and label attributes for displayong a small icon and a text label, respectively, to users for the corresponding app component. In every case, the icon and label that are set in a parent element become the default icon and label value for all child elements. For example, the icon and label value for all child elements. for example, the icon and label that are set in the <application> element that are default icon and label for each of the app's components (such as all activities).
+
+- Permissions: Androi apps must request permission to access sensitive user data (such as contacts and SMS) or certain system features (such as the camera and internet access). Each permission is identified by a uique label. For example, an app that needs to access the internet must have the following line in the manifest:
+	android.permission.INTERNET
+
+______________________________________________________________________
+Gradle Build Files
+
+Gradle build files use a domain-specific language or DSL to define custom build logic and to interact wth the Android-specific elements of the Android plugin for Gradle.
+Android Studio projects consiste of one or more modules, which are components that you can build, test, and debug independently. Each module has its own build file, so every Android studio prjoject contains two kinds of Gradle build files.
+- Top-Level Build File: this is where you'll find configuration options that are commn to all the modules that make up your projetc.
+- Module-Level Build File: Each module has its own Gradle build file that contains module-specific build settings. You'll spend most of your time editing module-level build file(s) rather than your project's top-level build file.
+- Gradle-wrapper.properties (Gradle Version): this file allows other people to build your cod, even if they don't hav Gradle installed on their machine. This file checks whether the correct version of Gradle is installed and downloads the necessary version if necessary.
+
+_________________________________________________________________________
+App Resources
+
+Resources are the additional files and static content that your code uses, such as bitmaps, layout definitions, user interface strings, animation instructions and more.
+You should always externalize app resources such as images and strings from you code, so that you can maintain the independently.
+Once you externalize your app resources, you can access them using resource IDs that are generated in your project's R class.
+You should place each type of resource in a specific subdirectory of your projetc's res/directory
+
+
+
+
+
+
 
