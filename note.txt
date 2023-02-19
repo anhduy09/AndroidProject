@@ -72,8 +72,43 @@ Resources are the additional files and static content that your code uses, such 
 You should always externalize app resources such as images and strings from you code, so that you can maintain the independently.
 Once you externalize your app resources, you can access them using resource IDs that are generated in your project's R class.
 You should place each type of resource in a specific subdirectory of your projetc's res/directory
+---------------------------------------------------------------------------
+Adapter
 
+An Adapter object acts as a bridge between an AdapterView and underlying data for that view. The Adapter provides acces to data items.
+The Adapter is also responsible for making a view for each item in the data set.
 
+<data source> ----- <Adapter> ------- <AdapterView (listview,...)>
+Whenever we want to bind some data which we get from any data source (ArrayList, HashMap, SQLite, etc) with a UI component (e.g. ListView, GridView, etc) then Adapter comes into the picture
+
+Type of Adapter
+There are the some commonly used Adapter in Android used to fill the data in the UI components
+
+BaseAdapter - It is parent adapter for all other adapters.
+ArrayAdapter - It is used whenever we have a list of single items which is backed by an array
+Custom ArrayAdapter - It is used whenever we need to display a custom list
+SimpleAdapter - It's an easy adapter to map a static data to views defined in your XML file
+Custom SimmpleAdapter - It's used whenever we need to display a customized list and needed t access teh child items of the list or grid
+
+BaseAdapter:
+- is a common base class of a general implementation of an Adapter that can be used in ListView, GridView, Spinner etc
+- Whenever we need to customized list in a listview or customized grids in a GridView we create our own adapter and extend base adapter in that.
+- Base Adapter can be extended to create a custom Adapter for displaying a custom list item. ArrayAdapter is also an implementation of BaseAdapter.
+
+Array Adapter:
+- Whenever we have a list of single items which is backed by an Array, we can use ArrayAdapter.
+You can use this adapter to provide views for an AdapterView,or returns a view for each object in a collection of data objetcs you provide, and can be used with list-based user interface widgets such as ListView or Spinner
+For instance, list of phone contacts, countries or names
+
+Adapter View:
+- An AdapterView is a view whose children are determined by an Adapter.
+- An AdapterView is a group of widgets in Android that include the ListView, Spinner and GridView. In general, these are the widgets that provide the selecting capability in the user interface
+
+- At a minimum, you will need to implement four methods. These four methods are called by Android to build your AdapterView and to return the correct information when one of the items in the AdapterView is selected.
++ getCount(): indicates to Android how many items(or rows) are in the data setthat will be presented in the AdapterView
++ getItem(int pos): get the data item associated with the item (or row) from the AdapterView passed as paramenter to the method. This method will be used by Android to fetch the approriate data to build the item/row in the AdapterView.
++ getItemId(int pos): this method returns the data set'sid for a item/row position of the AdapterView. Typically, the data set id matches the AdapterView rows so this method just returns the same value.
++ getView(int position, View convertView, ViewGroup parent): this method creates the View (which may be a single View component like a TextView or a complex set of widgets in a layout) that displays the data for the specified (by position) item/row in the AdapterView.
 
 
 
