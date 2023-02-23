@@ -110,6 +110,26 @@ Adapter View:
 + getItemId(int pos): this method returns the data set'sid for a item/row position of the AdapterView. Typically, the data set id matches the AdapterView rows so this method just returns the same value.
 + getView(int position, View convertView, ViewGroup parent): this method creates the View (which may be a single View component like a TextView or a complex set of widgets in a layout) that displays the data for the specified (by position) item/row in the AdapterView.
 
+_______________________________________________________________________________
+Stack and Heap
+
+7 facts about the stack and the heap
+
+1. Local variable and methods are on the stack and local variables are local to the specific method within which they were declared.
+2. Instance/class variables are on the heap (with their objetcs) but the reference to the object (its address), is a local variable on the stack
+3. We contraol what goes on the stacj. we can use the objects on the heap but only by referencing them
+4. The heap is kept and up to date by the garbage collector
+5. You don't delete objects but ART (Android runtime) system sends the garbage collector when it thinks it's approriate. An object is garbage collected when there is no longer a valid reference to it. So, when a reference variable, eithe local or instance, is removed from the stack, then its related object becomes viable for garbage collection. And when the ART system decides the time is right (usually very promptly), it will free up the RAM memory to avoid running out.
+6. If wee try to reference an object that doesn't exits, we will get a NullPointerException and the app will crash
+
+We don't need to cast like this: Button myButton = (Button) findViewById(R.id.myButton)
+because View class uses Java's generic automatic type inference (means cast is auto)
+
+Inner and anonymous classes.
+Inner class is class which is implemented and declared winthin a class. why would we use this?
+---> when we implement an inner class, the inner class can access the member variables of the enclosing class and the enclosing class can access the members of the inner class.
+
+We can also declare and implement an entire class within a method of one of our class. When we do so, we use a slightly different syntacs and do not use a name with the class. This is an anonymous class
 
 
 
