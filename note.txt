@@ -131,6 +131,15 @@ Inner class is class which is implemented and declared winthin a class. why woul
 
 We can also declare and implement an entire class within a method of one of our class. When we do so, we use a slightly different syntacs and do not use a name with the class. This is an anonymous class
 
+____________________________________________________________________________________
+What we will do to set up RecyclerView with RecyclerAdapter and an ArratList of notes
+
+1. Delete the temporary button and related code, and then add a RecyclerView widget to our layout with a specific id property
+2. Created an XML layout to represent each item in the list. We have already mentioned each item in the list will be a LinearLayout that contains three TextView widgets
+3. Create a new class that extends RecyclerAdapter and add code several overridden methods to control how it looks and behaves, including using our list item layout and ArrayList full of Note instance
+4. Add code to MainActivity class to use the RecyclerAdapter class and the RecyclerView widget and bind it to our ArrayList instance
+5. Add an ArrayList to MainActivity to hold all our notes and updates the CreateNewNote method to add any new notes created in the DialogNewNote class to this ArrayList
+
 
 
 
