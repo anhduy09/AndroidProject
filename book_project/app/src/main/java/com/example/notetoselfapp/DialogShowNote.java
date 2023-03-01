@@ -26,6 +26,7 @@ public class DialogShowNote extends DialogFragment {
         TextView txtTitle = dialogView.findViewById(R.id.txtTitle);
         TextView txtDescription = dialogView.findViewById(R.id.txtDescription);
         txtTitle.setText(mNote.getmTitle());
+        txtDescription.setText(mNote.getmDescription());
         TextView txtImportant = dialogView.findViewById(R.id.textViewImportant);
         TextView txtTodo = dialogView.findViewById(R.id.textViewTodo);
         TextView txtIdea = dialogView.findViewById(R.id.textViewIdea);
