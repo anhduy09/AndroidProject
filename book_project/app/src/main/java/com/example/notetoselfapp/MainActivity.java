@@ -1,5 +1,6 @@
 package com.example.notetoselfapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -7,7 +8,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +27,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 //    Note tempNote = new Note();
-    private List<Note> noteList = new ArrayList<>();
+//    private List<Note> noteList = new ArrayList<>();
+    private JSONSerializer jsonSerializer;
+    private List<Note> noteList;
     private RecyclerView recyclerView;
     private NoteAdapter mAdapter;
     FloatingActionButton fab;
+    private boolean mShowDividers;
+    private SharedPreferences mPrefs;
 //    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +64,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        jsonSerializer = new JSONSerializer("NoteToSelf.json", getApplicationContext());
+
+        try {
+            noteList = jsonSerializer.load();
+
+        } catch (Exception e) {
+            noteList = new ArrayList<Note>();
+            Log.e("Error loading note: ","",e);
+        }
+
         recyclerView = findViewById(R.id.recyclerView);
         mAdapter = new NoteAdapter(this, noteList);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); // add dividing line between items
         recyclerView.setAdapter(mAdapter);
 
+
+    }
+
+    public void saveNotes() {
+        try {
+            jsonSerializer.save(noteList);
+
+        } catch (Exception e) {
+            Log.e("Error saving note...","",e);
+        }
     }
 
     public void createNewNote(Note newNote) {
@@ -75,5 +103,46 @@ public class MainActivity extends AppCompatActivity {
         DialogShowNote dialogShowNote = new DialogShowNote();
         dialogShowNote.sendNoteSelected(noteList.get(adapterPosition));
         dialogShowNote.show(getSupportFragmentManager(),"");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
+        mShowDividers = mPrefs.getBoolean("dividers", true);
+        if (mShowDividers) {
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); // add dividing line between items
+        } else {
+            if (recyclerView.getItemDecorationCount() > 0) {
+                recyclerView.removeItemDecorationAt(0);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveNotes();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
