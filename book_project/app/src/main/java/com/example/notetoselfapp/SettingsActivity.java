@@ -24,8 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         mPrefs = getSharedPreferences("Note to Self", MODE_PRIVATE);
         mEditor = mPrefs.edit();
-        mShowDividers = mPrefs.getBoolean("divider", true);
+        mShowDividers = mPrefs.getBoolean("dividers", true);
         Switch switch1 = findViewById(R.id.switch1);
+        switch1.setChecked(mShowDividers);
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -44,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                mEditor.commit();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }

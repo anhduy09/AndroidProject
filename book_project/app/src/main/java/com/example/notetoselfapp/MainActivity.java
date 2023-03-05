@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
+        mPrefs = getSharedPreferences("Note to Self", MODE_PRIVATE);
         mShowDividers = mPrefs.getBoolean("dividers", true);
         if (mShowDividers) {
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); // add dividing line between items
