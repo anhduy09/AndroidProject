@@ -140,6 +140,18 @@ What we will do to set up RecyclerView with RecyclerAdapter and an ArratList of 
 4. Add code to MainActivity class to use the RecyclerAdapter class and the RecyclerView widget and bind it to our ArrayList instance
 5. Add an ArrayList to MainActivity to hold all our notes and updates the CreateNewNote method to add any new notes created in the DialogNewNote class to this ArrayList
 
+_____________________________________________________________________________________
+Canvas, Bitmap(map of bit) and ImageView quick summary:
+
+- Every app needs an Activity class to interact with the user and the underlying operating system. Therefore, we must conform to the required herarchy if we want to succeed.
+- We will use the ImageView class, which is a type of the View class. The View class is what Activity needs to display our app to the user.
+- The Canvas class supplies the ability to draw lines, pixels, and other graphics too. It has all the methods for doing things such as drawing shapes, text, lines, and image files, and even plotting individual pixels
+- The Bitmap class will be associated with the Canvas class and it is the surface that actually gets drawn upon
+- The Canvas class uses the Paint class to configure details such as the color.
+
+______________________________________________________________________________________
+Thread
+
 
 
 
