@@ -152,6 +152,29 @@ Canvas, Bitmap(map of bit) and ImageView quick summary:
 ______________________________________________________________________________________
 Thread
 
+______________________________________________________________________________________
+
+Fragment
+
+Fragments are reusable elements of an app just like any class, but as mentioned previously,
+they have special features, such as the ability to load their own view/layout as well as
+their very own lifecycle methods
+
+We can set up and control fragments very much like we do Activities, by overriding the
+appropriate lifecycle methods:
+• onCreate: In the onCreate method, we can initialize variables and do almost
+all the things we would typically have done in the Activity onCreate method.
+The big exception to this is initializing our UI.
+• onCreateView: In this method, we will, as the name suggests, get a reference
+to any of our UI widgets, set up anonymous classes to listen for clicks, and more
+besides, as we will soon see.
+• onAttach and onDetach: These methods are called just before Fragment is put
+into use/taken out of use.
+• onResume, onStart, onPause, and onStop: In these methods, we can take
+certain actions, such as creating or deleting objects or saving data, just like we have
+done with their Activity based counterparts.
+
+
 
 
 
