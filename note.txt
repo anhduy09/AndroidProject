@@ -174,6 +174,20 @@ into use/taken out of use.
 certain actions, such as creating or deleting objects or saving data, just like we have
 done with their Activity based counterparts.
 
+______________________________________________________________________________________
+What is Database??????????
+A database is both place of storage and a means to retrieve, store, and manipulate data.
+
+Android SQLite API
+
+SQLiteDatabase is a class that represents the actual database. The SQLite Openhelper class, however, is where most of the action takes place. This class will enable us to get access to a database and initilaize an instace of SQLiteDatabase.
+
+SQLiteOpenHelper is provides 2 virtual methods that we need to override. First is onCreate method which is called the first time a database is used; therefore, it makes sense that we would put our SQL to create our table structure in. The Second method we must override is onUpgrade, which as you ca probably guess is called when we udgrade our database (use ALTER to change its structure)
+
+
+
+
+
 
 
 
